@@ -1,51 +1,32 @@
-import { useState } from "react";
-import { subirMetadata } from "./uploadToIPFS";
-import { emitirDiploma } from "./contract";
+import { gql, useQuery } from '@apollo/client';
 
-function App() {
-    const [destinatario, setDestinatario] = useState("");
-    const [nombre, setNombre] = useState("");
-    const [imagen, setImagen] = useState(null);
-
-    async function manejarSubida() {
-        if (!imagen || !destinatario || !nombre) {
-            alert("Completa todos los campos");
-            return;
-        }
-
-        const metadataURI = await subirMetadata(nombre, "Diploma NFT", imagen);
-        if (metadataURI) {
-            await emitirDiploma(destinatario, metadataURI);
-            alert("NFT emitido con éxito!");
-        }
+const GET_DIPLOMAS = gql`
+  query GetDiplomas {
+    diplomas(first: 10) {
+      id
+      estudiante
+      metadataURI
     }
+  }
+`;
 
-    return (
-        <div>
-            <h1>🎓 Generar Diploma NFT</h1>
+function MostrarDiplomas() {
+  const { loading, error, data } = useQuery(GET_DIPLOMAS);
 
-            <input
-                type="text"
-                placeholder="Nombre del estudiante"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-            />
-            
-            <input
-                type="text"
-                placeholder="Dirección del destinatario"
-                value={destinatario}
-                onChange={(e) => setDestinatario(e.target.value)}
-            />
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error 😢</p>;
 
-            <input
-                type="file"
-                onChange={(e) => setImagen(e.target.files[0])}
-            />
-
-            <button onClick={manejarSubida}>Emitir Diploma NFT</button>
+  return (
+    <div>
+      <h2>📜 Diplomas emitidos</h2>
+      {data.diplomas.map((diploma) => (
+        <div key={diploma.id}>
+          <p><strong>Estudiante:</strong> {diploma.estudiante}</p>
+          <p><strong>Metadata URI:</strong> {diploma.metadataURI}</p>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
 
-export default App;
+export default MostrarDiplomas;
