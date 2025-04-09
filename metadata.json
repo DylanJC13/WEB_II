@@ -1,0 +1,11 @@
+{
+    "name": "NFT Perfección",
+    "description": "Un NFT único que representa la perfección .",
+    "image": "ipfs://QmYui4jL74F1M8GFFELHVokbgCdp9KtoUoFcrZhLS9d1Sx",
+    "attributes": [
+      { "trait_type": "Categoría", "value": "Arte Digital" },
+      { "trait_type": "Creador", "value": "Dylan Cobos" },
+      { "trait_type": "Fecha", "value": "2025-03-26 " }
+    ]
+  }
+  

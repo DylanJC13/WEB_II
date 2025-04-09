@@ -1,0 +1,62 @@
+console.log("📌 Conectado al contrato en:", contrato.address);
+const contrato = await ethers.getContractAt("DiplomaNFT", "0x139D71D8F8a13BF5F28C196Bb9b73df7b9Ddb7Df");
+console.log("🎉 ¡Nuevo NFT con la imagen de Perfección minteado con éxito!");
+await tx.wait();
+const tx = await contrato.connect(owner).mintDiploma(destinatario, metadataURI);
+const [owner] = await ethers.getSigners(); 
+const metadataURI = "ipfs://bafkreig4t757riycddgczz3jywod4tglt3o4hya3jr6fdkaq23fcdsqfhy";
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6";
+const contrato = await ethers.getContractAt("DiplomaNFT", "0x139D71D8F8a13BF5F28C196Bb9b73df7b9Ddb7Df");
+const contrato = await ethers.getContractAt("ArteDigital", "0x139D71D8F8a13BF5F28C196Bb9b73df7b9Ddb7Df");
+await tx.wait();
+const tx = await contrato.connect(owner).mintDiploma(destinatario, metadataURI);
+const [owner] = await ethers.getSigners(); 
+const metadataURI = "ipfs://QmYui4jL74F1M8GFFELHVokbgCdp9KtoUoFcrZhLS9d1Sx";
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6"; 
+const contrato = await ethers.getContractAt("DiplomaNFT", "0x1264Ac5D9FEAB5Dd9Cb13607E5462Baf42a6A8Df");
+await tx.wait();
+console.log("📜 Transacción enviada:", tx.hash);
+const tx = await contrato.connect(owner).mintDiploma(destinatario, metadataURI);
+const [owner] = await ethers.getSigners(); 
+const metadataURI = "ipfs://QmYui4jL74F1M8GFFELHVokbgCdp9KtoUoFcrZhLS9d1Sx";
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6";
+const contrato = await ethers.getContractAt("DiplomaNFT", "0x1264Ac5D9FEAB5Dd9Cb13607E5462Baf42a6A8Df");
+console.log("Token URI:", tokenURI);
+const tokenURI = await contrato.tokenURI(1);
+console.log("Balance de NFTs:", balance.toString());
+const balance = await contrato.balanceOf(destinatario);
+await tx.wait();
+const tx = await contrato.connect(owner).mintDiploma(destinatario, metadataURI);
+const [owner] = await ethers.getSigners();
+const metadataURI = "ipfs://QmYui4jL74F1M8GFFELHVokbgCdp9KtoUoFcrZhLS9d1Sx";
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6";
+const contrato = await ethers.getContractAt("DiplomaNFT", "0xb7cE52a3C58aB9fa9FcCF42D46c068acb368691b");
+await tx.wait();
+const tx = await contrato.connect(owner).mintDiploma(destinatario, metadataURI);
+const [owner] = await ethers.getSigners();
+const metadataURI = "ipfs://QmdQdgZEirDGdgfb3ufFhQFyX8xWRBoTEuRjghtviSvHEw";
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6"; 
+const contrato = await ethers.getContractAt("DiplomaNFT", "0xb7cE52a3C58aB9fa9FcCF42D46c068acb368691b");
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6"; 
+console.log("Contrato cargado correctamente.");
+const contrato = await ethers.getContractAt("DiplomaNFT", "0xb7cE52a3C58aB9fa9FcCF42D46c068acb368691b");
+const contratoConSigner = contrato.connect(signer);
+const signer = await ethers.getSigner();
+const metadataURI = "ipfs://QmTASdjf1h2o34ksdf..."; // Reemplázalo con un URI real de IPFS
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6"; // La dirección que recibirá el NFT
+const contrato = await ethers.getContractAt("DiplomaNFT", "0xb7cE52a3C58aB9fa9FcCF42D46c068acb368691b");
+console.log(accounts);
+const accounts = await ethers.getSigners();
+const owner = await ethers.getSigner();
+const metadataURI = "ipfs://QmTASdjf1h2o34ksdf...";
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6";
+const contrato = await ethers.getContractAt("DiplomaNFT", "0xb7cE52a3C58aB9fa9FcCF42D46c068acb368691b");
+console.log("NFT creado en la transacción:", tx.hash);
+await tx.wait();
+const tx = await contrato.emitirCertificacion(destinatario, metadataURI);
+// Ejecutar la transacción para mintear el NFT
+const metadataURI = "ipfs://QmTASdjf1h2o34ksdf...";
+// URI de los metadatos en IPFS
+const destinatario = "0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6";
+// Dirección de la wallet que recibirá el NFT
+const contrato = await ethers.getContractAt("DiplomaNFT", "0xb7cE52a3C58aB9fa9FcCF42D46c068acb368691b");
