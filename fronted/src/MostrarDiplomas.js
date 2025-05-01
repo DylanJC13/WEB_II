@@ -1,46 +1,57 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { initMoralis } from './moralisConfig';
+import Moralis from 'moralis';
 
-function MostrarDiplomas() {
+const MostrarNFTs = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+  
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
-        const response = await fetch(
-          'https://api.opensea.io/api/v1/assets?owner=0x20967B36cF8BB9E16E11f40Ac9098CE28D84F9d6&limit=10'
-        );
-        const data = await response.json();
-        setNfts(data.assets || []);
+        await initMoralis(); // Solo se inicia si no ha sido iniciado
+  
+        const response = await Moralis.EvmApi.nft.getMultipleNFTs({
+          chain: "0x89",
+          tokens: [
+            { tokenAddress: "0xb7ce52a3c58ab9fa9fccf42d46c068acb368691b", tokenId: "1" },
+            { tokenAddress: "0xb7ce52a3c58ab9fa9fccf42d46c068acb368691b", tokenId: "2" }
+          ]
+        });
+  
+        console.log(response.raw);
       } catch (error) {
-        console.error('Error al traer los NFTs desde OpenSea:', error);
-      } finally {
-        setLoading(false);
+        console.error("Error al obtener los NFTs:", error);
       }
     };
-
+  
     fetchNFTs();
   }, []);
 
-  if (loading) return <p>Cargando diplomas desde OpenSea...</p>;
+  if (loading) {
+    return <p>Cargando NFTs...</p>;
+  }
 
-  if (nfts.length === 0) return <p>No hay diplomas encontrados.</p>;
+
 
   return (
     <div>
-      <h2>📜 Diplomas emitidos</h2>
-      {nfts.map((nft) => (
-        <div key={nft.id} style={{ border: '1px solid #ccc', marginBottom: 20, padding: 10, borderRadius: 8 }}>
-          <img src={nft.image_url} alt={nft.name} width="200" />
-          <h3>{nft.name}</h3>
-          <p>{nft.description}</p>
-          <a href={nft.permalink} target="_blank" rel="noopener noreferrer">
-            Ver en OpenSea
-          </a>
+      <h2>🎨 NFTs Obtenidos</h2>
+      {nfts.map((nft, index) => (
+        <div key={index} style={{ border: '1px solid #ccc', marginBottom: 20, padding: 10, borderRadius: 8 }}>
+          {nft.normalized_metadata?.image && (
+            <img src={nft.normalized_metadata.image} alt={nft.normalized_metadata.name} width="200" />
+          )}
+          <h3>{nft.normalized_metadata?.name || `Token #${nft.token_id}`}</h3>
+          <p>{nft.normalized_metadata?.description}</p>
+          <p><strong>Contrato:</strong> {nft.token_address}</p>
+          <p><strong>ID del Token:</strong> {nft.token_id}</p>
         </div>
       ))}
     </div>
   );
-}
+};
 
-export default MostrarDiplomas;
+export default MostrarNFTs;
