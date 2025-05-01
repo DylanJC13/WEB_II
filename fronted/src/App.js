@@ -4,6 +4,8 @@ import NFTGallery from "./NFTGallery";
 
 const App = () => {
   const [nfts, setNfts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchNFTs = async () => {
@@ -22,7 +24,10 @@ const App = () => {
 
         setNfts(response.raw);
       } catch (e) {
-        console.error("Error al obtener los NFTs:", e);
+        setError("No se pudieron cargar los NFTs. Intenta nuevamente.");
+        console.error(e);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -30,14 +35,22 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-indigo-100">
-      <header className="py-8 text-center bg-white shadow">
-        <h1 className="text-4xl font-extrabold text-indigo-700">Galería de NFTs</h1>
-        <p className="text-gray-600 mt-2">Diplomas digitales en blockchain</p>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-white">
+      <header className="bg-white shadow-md py-6 mb-8 text-center">
+        <h1 className="text-4xl font-bold text-indigo-600">🎓 Galería de Diplomas NFT</h1>
+        <p className="text-gray-600 mt-2">Certificados únicos emitidos en blockchain</p>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-10">
-        <NFTGallery nfts={nfts} />
+      <main className="max-w-6xl mx-auto px-4">
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-indigo-600"></div>
+          </div>
+        ) : error ? (
+          <p className="text-center text-red-600">{error}</p>
+        ) : (
+          <NFTGallery nfts={nfts} />
+        )}
       </main>
     </div>
   );
